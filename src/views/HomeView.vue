@@ -3,6 +3,6 @@
 
 <template>
   <main>
-    Home View
+    <div class="bg-green-600 p-5">Home</div>
   </main>
 </template>
