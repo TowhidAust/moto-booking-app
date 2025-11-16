@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ServiceCenterDetails from '@/features/serviceCenterDetails/ServiceCenterDetails.vue';
+import ServiceCenterDetails from '@/features/serviceCenters/ServiceCenterDetails.vue';
 
 </script>
 

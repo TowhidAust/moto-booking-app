@@ -90,8 +90,8 @@ const selectPackage = (packageId: number) => {
 
 const bookService = () => {
   if (selectedPackage.value) {
-    const pkg = servicePackages.value.find(p => p.id === selectedPackage.value)
-    alert(`Booking confirmed for ${pkg?.name} at ${serviceCenter.value.name}`)
+    // const pkg = servicePackages.value.find(p => p.id === selectedPackage.value)
+    router.push(`/service-center/${serviceCenter.value.id}/schedule`)
   } else {
     alert('Please select a service package first')
   }
@@ -147,8 +147,7 @@ const goBack = () => {
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <Card 
-          v-for="pkg in servicePackages" :key="pkg.id" :class="[
+        <Card v-for="pkg in servicePackages" :key="pkg.id" :class="[
           'cursor-pointer relative',
           selectedPackage === pkg.id
             ? 'ring-2 ring-blue-500 border-blue-500 shadow-lg'

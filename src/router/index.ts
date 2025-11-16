@@ -22,6 +22,16 @@ const router = createRouter({
       name: 'service-centers',
       component: () => import('../views/ServiceCenterListView.vue'),
     },
+    {
+      path: '/service-center/:id/schedule',
+      name: 'schedule',
+      component: () => import('../views/ScheduleView.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
+    }
   ],
 })
 
