@@ -28,6 +28,16 @@ const router = createRouter({
       component: () => import('../views/ScheduleView.vue'),
     },
     {
+      path: '/service-center/:id/payment-checkout',
+      name: 'payment-checkout',
+      component: () => import('../views/PaymentCheckoutView.vue'),
+    },
+    {
+      path: '/doorstep-service',
+      name: 'doorstep-service',
+      component: () => import('../views/DoorstepServiceView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),

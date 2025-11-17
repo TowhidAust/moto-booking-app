@@ -72,8 +72,8 @@ const canConfirm = computed(() => {
 
 const confirmBooking = () => {
   if (canConfirm.value) {
-    alert(`Booking confirmed for ${selectedDateObj.value?.fullDate} at ${selectedTime.value}`)
-    router.push('/')
+    // alert(`Booking confirmed for ${selectedDateObj.value?.fullDate} at ${selectedTime.value}`)
+    router.push(`/service-center/${router.currentRoute.value.params.id}/payment-checkout`)
   }
 }
 

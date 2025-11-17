@@ -10,7 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <div class="flex-1 flex gap-4">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/service-centers">Service Centers</RouterLink>
-            <RouterLink to="/doorstep-servicing">Doorstep Servicing</RouterLink>
+            <RouterLink to="/doorstep-service">Doorstep Servicing</RouterLink>
           </div>
 
           <div class="flex gap-4">
