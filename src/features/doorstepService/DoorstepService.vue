@@ -7,11 +7,11 @@ import CardHeader from '@/components/ui/card/CardHeader.vue'
 import CardTitle from '@/components/ui/card/CardTitle.vue'
 import CardDescription from '@/components/ui/card/CardDescription.vue'
 import Button from '@/components/ui/button/Button.vue'
-import { 
-  Speaker, 
-  Wrench, 
-  Droplets, 
-  Search, 
+import {
+  Speaker,
+  Wrench,
+  Droplets,
+  Search,
   Link2,
   Battery,
   Gauge,
@@ -158,130 +158,115 @@ const goBack = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8">
-      <!-- Back Button -->
-      <Button variant="outline" @click="goBack" class="mb-6">
-        ← Back to Home
-      </Button>
+  <div>
+    <!-- Back Button -->
+    <Button variant="outline" @click="goBack" class="mb-6">
+      ← Back to Home
+    </Button>
 
-      <!-- Header -->
-      <div class="mb-8 text-center max-w-3xl mx-auto">
-        <div class="flex justify-center mb-4">
-          <div class="p-4 bg-blue-100 rounded-full">
-            <Home class="w-12 h-12 text-blue-600" />
-          </div>
+    <!-- Header -->
+    <div class="mb-8 text-center max-w-3xl mx-auto">
+      <div class="flex justify-center mb-4">
+        <div class="p-4 bg-blue-100 rounded-full">
+          <Home class="w-12 h-12 text-blue-600" />
         </div>
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Doorstep Service</h1>
-        <p class="text-lg text-gray-600">
-          Get your motorcycle serviced at your home. Select a service package and schedule a visit.
-        </p>
       </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Doorstep Service</h1>
+      <p class="text-lg text-gray-600">
+        Get your motorcycle serviced at your home. Select a service package and schedule a visit.
+      </p>
+    </div>
 
-      <!-- Service Packages Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-        <Card
-          v-for="service in doorstepServices"
-          :key="service.id"
-          :class="[
-            'cursor-pointer transition-all duration-300 relative hover:shadow-lg',
-            selectedService === service.id
-              ? 'ring-2 ring-blue-500 border-blue-500 shadow-lg'
-              : 'hover:border-blue-200',
-          ]"
-          @click="selectService(service.id)"
-        >
-          <div v-if="service.popular" class="absolute -top-2 -right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-            Popular
+    <!-- Service Packages Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+      <Card v-for="service in doorstepServices" :key="service.id" :class="[
+        'cursor-pointer transition-all duration-300 relative hover:shadow-lg',
+        selectedService === service.id
+          ? 'ring-2 ring-blue-500 border-blue-500 shadow-lg'
+          : 'hover:border-blue-200',
+      ]" @click="selectService(service.id)">
+        <div v-if="service.popular"
+          class="absolute -top-2 -right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+          Popular
+        </div>
+
+        <CardHeader class="pb-3">
+          <div class="flex flex-col items-center text-center mb-2">
+            <div class="p-3 bg-blue-100 rounded-full mb-3">
+              <component :is="service.icon" class="w-8 h-8 text-blue-600" />
+            </div>
+            <CardTitle class="text-lg leading-tight mb-2">{{ service.name }}</CardTitle>
+            <CardDescription class="text-sm">{{ service.description }}</CardDescription>
           </div>
-          
-          <CardHeader class="pb-3">
-            <div class="flex flex-col items-center text-center mb-2">
-              <div class="p-3 bg-blue-100 rounded-full mb-3">
-                <component :is="service.icon" class="w-8 h-8 text-blue-600" />
+        </CardHeader>
+
+        <CardContent class="space-y-3">
+          <div class="flex items-center justify-between text-sm border-t border-b py-2">
+            <span class="text-gray-600">Duration</span>
+            <span class="font-medium">{{ service.duration }}</span>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600">Price</span>
+            <span class="text-2xl font-bold text-blue-600">{{ service.price }}</span>
+          </div>
+
+          <Button :variant="selectedService === service.id ? 'default' : 'outline'" class="w-full"
+            @click.stop="selectService(service.id)">
+            {{ selectedService === service.id ? 'Selected' : 'Select' }}
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+
+    <!-- Book Service Button -->
+    <div class="flex justify-center pb-8">
+      <Button size="lg" class="px-12 py-6 text-lg h-auto" :disabled="!selectedService" @click="bookService">
+        Book Selected Service
+      </Button>
+    </div>
+
+    <!-- Info Section -->
+    <div class="max-w-4xl mx-auto">
+      <Card class="bg-blue-50 border-blue-200">
+        <CardContent class="py-6">
+          <h3 class="font-bold text-lg text-gray-900 mb-3">How It Works</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="flex gap-3">
+              <div
+                class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                1
               </div>
-              <CardTitle class="text-lg leading-tight mb-2">{{ service.name }}</CardTitle>
-              <CardDescription class="text-sm">{{ service.description }}</CardDescription>
-            </div>
-          </CardHeader>
-
-          <CardContent class="space-y-3">
-            <div class="flex items-center justify-between text-sm border-t border-b py-2">
-              <span class="text-gray-600">Duration</span>
-              <span class="font-medium">{{ service.duration }}</span>
-            </div>
-            
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-600">Price</span>
-              <span class="text-2xl font-bold text-blue-600">{{ service.price }}</span>
-            </div>
-
-            <Button
-              :variant="selectedService === service.id ? 'default' : 'outline'"
-              class="w-full"
-              @click.stop="selectService(service.id)"
-            >
-              {{ selectedService === service.id ? 'Selected' : 'Select' }}
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      <!-- Book Service Button -->
-      <div class="flex justify-center pb-8">
-        <Button
-          size="lg"
-          class="px-12 py-6 text-lg h-auto"
-          :disabled="!selectedService"
-          @click="bookService"
-        >
-          Book Selected Service
-        </Button>
-      </div>
-
-      <!-- Info Section -->
-      <div class="max-w-4xl mx-auto">
-        <Card class="bg-blue-50 border-blue-200">
-          <CardContent class="py-6">
-            <h3 class="font-bold text-lg text-gray-900 mb-3">How It Works</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="flex gap-3">
-                <div class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                  1
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Select Service</p>
-                  <p class="text-gray-600">Choose from available doorstep services</p>
-                </div>
-              </div>
-              <div class="flex gap-3">
-                <div class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                  2
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Schedule Visit</p>
-                  <p class="text-gray-600">Pick your preferred date and time</p>
-                </div>
-              </div>
-              <div class="flex gap-3">
-                <div class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                  3
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Get Service</p>
-                  <p class="text-gray-600">Our expert will arrive at your location</p>
-                </div>
+              <div>
+                <p class="font-semibold text-gray-900">Select Service</p>
+                <p class="text-gray-600">Choose from available doorstep services</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <div class="flex gap-3">
+              <div
+                class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                2
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">Schedule Visit</p>
+                <p class="text-gray-600">Pick your preferred date and time</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div
+                class="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                3
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">Get Service</p>
+                <p class="text-gray-600">Our expert will arrive at your location</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>
 
-<style scoped>
-h1, h3 {
-  font-family: 'Telenor', sans-serif;
-}
-</style>
+<style scoped></style>

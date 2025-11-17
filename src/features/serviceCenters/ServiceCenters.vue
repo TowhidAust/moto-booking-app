@@ -85,19 +85,16 @@ const bookServiceCenter = (id: number) => {
 
 </script>
 <template>
-  <div class="container mx-auto px-4 py-8 bg-gray-50">
+  <div>
     <div class="mb-8">
       <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Service Centers</h1>
       <p class="text-gray-600">Find and book your nearest motorcycle service center</p>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card 
-        v-for="serviceCenter in serviceCenters" 
-        :key="serviceCenter.id" 
+      <Card v-for="serviceCenter in serviceCenters" :key="serviceCenter.id"
         class="hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-blue-200"
-        @click="bookServiceCenter(serviceCenter.id)"
-      >
+        @click="bookServiceCenter(serviceCenter.id)">
         <CardHeader class="pb-3">
           <div class="flex items-start justify-between">
             <CardTitle class="text-xl font-semibold leading-tight">
@@ -110,24 +107,20 @@ const bookServiceCenter = (id: number) => {
             <span class="text-sm text-gray-500">({{ serviceCenter.reviews }} reviews)</span>
           </div>
         </CardHeader>
-        
+
         <CardContent class="space-y-3">
           <div class="flex items-start gap-2 text-gray-600">
             <MapPin class="w-4 h-4 mt-0.5 shrink-0 text-blue-600" />
             <span class="text-sm">{{ serviceCenter.address }}</span>
           </div>
-          
+
           <div class="flex items-center gap-2 text-gray-600">
             <Phone class="w-4 h-4 shrink-0 text-blue-600" />
             <span class="text-sm">{{ serviceCenter.phone }}</span>
           </div>
-          
+
           <div class="pt-2">
-            <Button 
-              class="w-full" 
-              variant="default"
-              @click.stop="bookServiceCenter(serviceCenter.id)"
-            >
+            <Button class="w-full" variant="default" @click.stop="bookServiceCenter(serviceCenter.id)">
               Book Appointment
             </Button>
           </div>
@@ -137,8 +130,4 @@ const bookServiceCenter = (id: number) => {
   </div>
 </template>
 
-<style scoped>
-h1 {
-  font-family: 'Telenor', sans-serif;
-}
-</style>
+<style scoped></style>
