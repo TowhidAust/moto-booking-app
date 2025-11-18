@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import('../views/DoorstepServiceView.vue'),
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('../views/ProfileView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),
